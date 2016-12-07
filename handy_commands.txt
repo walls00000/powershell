@@ -1,0 +1,24 @@
+########### COMMANDS ##########
+wdsutil /stop-Server
+wdsutil /start-Server
+Get-Service | Select-Object Name | Select-String Win | Format-List
+
+Get-Eventlog Application -newest 3 | Format-List
+ipconfig | select-string -pattern fe80
+sconfig
+########## FROM THE OMNISTACK ##########
+Get-VM | stop-vm
+Get-VM | start-vm
+Get-VM | Enable-VMConsoleSupport
+Get-VM | Disable-VMConsoleSupport
+Get-VM | Remove-VM
+### Place a SCVMHost into maintenance mode
+Disable-SCVMHost -VMHost <host> 
+
+######### FROM  THE SCVMM HOST ##########
+### Remove a stuck node
+Get-SCVMHost -ComputerName <name> | Remove-SCVMHost -Force
+
+######### ANY HOST ##########
+([System.Net.Dns]::GetHostAddress('hostname')).IPAddressToString
+Get-NetFirewallRule | where {$_.enabled -eq 'true' -AND $_.direction -eq 'inbound'} | select DisplayName,Direction,Enabled
