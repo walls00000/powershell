@@ -26,3 +26,7 @@ Get-NetFirewallRule | where {$_.enabled -eq 'true' -AND $_.direction -eq 'inboun
 ## JSON Conversion ##
 Get-Service | ConvertTo-Json -Compress > tmp\service.json
 cat .\tmp\service.json | ConvertFrom-Json
+
+## DIFF ##
+Get-Process | Export-CliXML reference.xml
+Diff -reference (Import-CliXML reference.xml) -difference (Get-Process) -property Name
