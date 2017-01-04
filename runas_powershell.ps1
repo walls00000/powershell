@@ -1,0 +1,1 @@
+runas /noprofile /user:WALLACE\administrator powershell

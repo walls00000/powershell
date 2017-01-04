@@ -22,3 +22,7 @@ Get-SCVMHost -ComputerName <name> | Remove-SCVMHost -Force
 ######### ANY HOST ##########
 ([System.Net.Dns]::GetHostAddress('hostname')).IPAddressToString
 Get-NetFirewallRule | where {$_.enabled -eq 'true' -AND $_.direction -eq 'inbound'} | select DisplayName,Direction,Enabled
+
+## JSON Conversion ##
+Get-Service | ConvertTo-Json -Compress > tmp\service.json
+cat .\tmp\service.json | ConvertFrom-Json
